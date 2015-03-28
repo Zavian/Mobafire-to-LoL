@@ -17,4 +17,6 @@ Just compile the file worker.py with Python 3.
 - Create a local database of default guides
 - Create a GUI
 - Make possible to search through various guides
+- Creating automatically the categories
+- Displaying the suggested number of items to buy
 - Various
