@@ -11,6 +11,8 @@ Just compile the file worker.py with Python 3.
 
 > Example: "C:\Program Files (x86)\Riot Games\League of Legends\Config\Champions\"
 
+*Right now you will have to change manually the variable "site" into the file "htmlreader.py" although this is just temporary*
+
 # Todo
 - Create a local database of default guides
 - Create a GUI
