@@ -2,6 +2,7 @@ import os
 
 folder = "D:\Giochi\LoL\Config\Champions"
 folders = []
+site = "http://www.mobafire.com/league-of-legends/build/season-5-welcome-to-the-league-of-draven-247111"
 
 for filename in os.listdir(folder):
     folders.append(filename)
@@ -407,3 +408,4 @@ items = {
 	"Zhonya's Hourglass":3157,
 	"Zz'Rot Portal":3512
 }
+

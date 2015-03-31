@@ -10,7 +10,9 @@ _DEBUG = True
 
 catOffsets = []
 iteOffsets = []
+guideTitOffset = []
 titOffset = []
+
 
 datas = []
 
@@ -28,15 +30,23 @@ class MyHTMLParser(HTMLParser):
     # Globals
     findIteEnd = False
     findCatEnd = False
+    findGuideTitEnd = False
     findTitEnd = False
 
     # Definitions
     def handle_starttag(self, tag, attrs):
+        #if _DEBUG: print("Tag found: " + tag)
         if tag == "h2":
             if any("guide-main-title" in s for s in attrs):
                 linen, offset = self.getpos()
-                titOffset.append(offset)
-                findTitEnd = True
+                guideTitOffset.append(offset)
+                findGuideTitEnd = True
+        if tag == "title":
+            print("Title found")
+            linen, offset = self.getpos()
+            titOffset.append(str(offset))
+            print(titOffset)
+            findTitEnd = True
 
         if tag == "div":
             if any("item-wrap self-clear float-left" in s for s in attrs):
@@ -49,25 +59,31 @@ class MyHTMLParser(HTMLParser):
                self.findIteEnd = True
 
     def handle_endtag(self, tag):
+        #if _DEBUG: print("Tag found: " + tag)
+        if tag == "title":
+            linen, offset = self.getpos()
+            titOffset.append(str(offset))
+            self.findTitEnd = False
+
         if self.findIteEnd: 
             linen, offset = self.getpos()
             iteOffsets[-1] = str(iteOffsets[-1]) + " " + str(offset)
             self.findIteEnd = False
-            datas.append(self.get_starttag_text())
+            datas.append(self.get_starttag_text())        
 
         if self.findCatEnd:
             linen, offset = self.getpos()
             catOffsets[-1] = str(catOffsets[-1]) + " " + str(offset)
             self.findCatEnd = False
 
-        if self.findTitEnd:
+        if self.findGuideTitEnd:
             linen, offset = self.getpos()
-            titOffset[-1] = str(titOffset[-1]) + " " + str(offset)
-            self.findTitEnd = False;
+            guideTitOffset[-1] = str(guideTitOffset[-1]) + " " + str(offset)
+            self.findGuideTitEnd = False;
 
 
 # Connection stuff
-site = "http://www.mobafire.com/league-of-legends/build/xerath-the-magus-ascendent-392279"
+site = config.site
 connection = urllib.request.Request(site, headers=config.hdr)
 
 # Parsing the whole page in a huge string
@@ -111,15 +127,19 @@ for x in datas:
     if _DEBUG: print(x[Osup:Oinf]) # Debug
 
 
-#print(titOffset[0])
+#print(guideTitOffset[0])
 
-ind = indexOf(words[(titOffset[0] + 1):], "/h2>")
-title = words[titOffset[0] + len('<h2 class="guide-main-title">'):titOffset[0] + ind]
+ind = indexOf(words[(guideTitOffset[0] + 1):], "/h2>")
+guideTitle = words[guideTitOffset[0] + len('<h2 class="guide-main-title">'):guideTitOffset[0] + ind]
+
+print(titOffset)
+title = words[int(titOffset[0]) + len("<title>"):int(titOffset[1])]
 
 if _DEBUG: 
     utils.printDebug(categories, "Categories")
     utils.printDebug(itemIDs, "Item IDs")
     utils.printDebug(itemNames, "Item Names")
     print("Title: " + title)
+    print("Guide Title: " + guideTitle)
 
 
