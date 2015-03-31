@@ -6,9 +6,9 @@ and the program will parse it into a json file into the right directory.
 
 # Usage
 Firstly you need to install beautifulsoup
-'''
+```
 pip install beautifulsoup4
-'''
+```
 Just compile the file worker.py with Python 3. 
 
 **Remember to change the value of the variable "folder" into the config.py file**
