@@ -1,5 +1,7 @@
-import config
+# DEPRECATED OMG
+
 import utils
+import config
 #import main
 import urllib.request
 from html.parser import HTMLParser

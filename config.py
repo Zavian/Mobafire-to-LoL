@@ -2,7 +2,7 @@ import os
 
 folder = "D:\Giochi\LoL\Config\Champions"
 folders = []
-site = "http://www.mobafire.com/league-of-legends/build/season-5-welcome-to-the-league-of-draven-247111"
+site = "http://www.mobafire.com/league-of-legends/build/victorious-vi-how-to-carry-soloqueue-updated-379601"
 
 for filename in os.listdir(folder):
     folders.append(filename)
@@ -327,7 +327,7 @@ items = {
 	"Ranger's Trailblazer - Warrior":3723,
 	"Ranger's Trailblazer":3713,
 	"Raptor Cloak":2053,
-	"Ravenous Hydra (Melee Only)":3074,
+	"Ravenous Hydra":3074,
 	"Recurve Bow":1043,
 	"Rejuvenation Bead":1006,
 	"Relic Shield":3302,
