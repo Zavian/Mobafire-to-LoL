@@ -50,9 +50,8 @@ for i in range(0, len(cat)):
 		if len(splitter) > 1:
 			item = splitter[0]
 			count = splitter[1]
-		if count != "":
-			json += '{"count":'+ str(count) + ',"id":"' + str(item) + '"}'
-		else: json += '{"count":1,"id":"' + str(item) + '"}'
+		else: count = "1"
+		json += '{"count":'+ str(count) + ',"id":"' + str(item) + '"}'
 		if items[i][-1] != item: json += ","
 		count = ""
 	json += '], "type":"' + cat[i] + '"'
